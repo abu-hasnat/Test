@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Test.Models;
 
 namespace Test.Areas.Identity.Data;
 
@@ -12,6 +13,8 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
     }
 
+    public DbSet<Applicant> Applicants { get; set; }
+    public DbSet<Employer> Employers { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
