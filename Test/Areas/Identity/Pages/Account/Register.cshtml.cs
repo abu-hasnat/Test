@@ -97,6 +97,11 @@ namespace Test.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            
+            [Display(Name = "Register as a:")]
+            
+            public string UserType { get; set; }
         }
 
 
@@ -140,8 +145,16 @@ namespace Test.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        //await _signInManager.SignInAsync(user, isPersistent: false);
+                        //return LocalRedirect(returnUrl);
+                        if(Input.UserType == "applicant")
+                        {
+                            return Redirect($"/applicants/profile/{user.Id}");
+                        }
+                        else
+                        {
+                            return Redirect($"/employers/profile/{user.Id}");
+                        }
                     }
                 }
                 foreach (var error in result.Errors)
